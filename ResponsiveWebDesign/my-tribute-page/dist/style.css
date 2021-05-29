@@ -1,0 +1,44 @@
+html
+{
+  font-family: Georgia;
+}
+#img-div, #link-section, article
+{
+ width: 70%;
+ margin-left: auto;
+ margin-right: auto;
+}
+#img-div, #link-section
+{
+ background-color: lightgrey;
+}
+#image
+{
+  width: 50%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  --filter: grayscale(50%);
+}
+div
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#title, #subtitle, #img-caption, article
+{
+  text-align: center;
+}
+#subtitle
+{
+  color: grey;
+}
+ul, li
+{
+   margin-left: 20%;
+   text-align: left;
+}
