@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Survey Form</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+<html>
+      
+<head>
+  <header id="head-div">
+  <h1 id="title">Personal Training</h1>
+  <p id="description">Level Up Your Fitness</p>
+  </header>
+</head>
+  
+<body>
+
+  <div id="survey-area">
+  <br/>
+  <form action="" id="survey-form">
+      <p id="div-like"><b>Tell us about yourself:</b><p>
+      <div class="input">
+        <label id="name-label">Name</label>
+        <input type="text" id="name" placeholder="John Doe" required></input>
+      </div>
+      <div class="input">
+        <label id="email-label">Email</label>
+        <input type="email" id="email" placeholder="email@example.com" required></input>
+      </div>
+      <div class="input">
+        <label id="number-label">Height in cm</label>
+        <input type="number" id="number" min="55" max="272" placeholder="185"></input>
+      </div>
+      <div class="input">
+        <label>Weight in kg</label>
+        <input type="number" id="number" min="6" max="362" placeholder="100"></input>
+      </div>
+      <div>
+        
+      
+        <label for="fitness"><b>Choose your fitness level:</b></br></label><br/>
+        
+          <select id="dropdown" name="fitness-level">
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Pro Athlete">Pro Athlete</option>
+        </select>
+      </div>
+      <div>
+
+          <p><b>Choose your prefered weekday:</b></p>
+          <input type="radio" id="Monday" name="weekday" value="Monday">
+          <label for="Monday">Monday</label><br/>
+          <input type="radio" id="Tuesday" name="weekday" value="Tuesday">
+          <label for="Tuesday">Tuesday</label><br/>
+          <input type="radio" id="Wednesday" name="weekday" value="Wednesday">
+          <label for="Wednesday">Wednesday</label><br/>
+          <input type="radio" id="Thursday" name="weekday" value="Thursday">
+          <label for="Thursday">Thursday</label><br/>
+          <input type="radio" id="Friday" name="weekday" value="Friday">
+          <label for="Friday">Friday</label>
+      </div>
+      <div>
+          <p><b>Choose your prefered exercise:</b></p>
+          <input type="checkbox" value="Deadlift">
+          <label for="Deadlift">Deadlift</label><br/>
+          <input type="checkbox" value="Backsquat">
+          <label for="Backsquat">Backsquat</label><br/>
+          <input type="checkbox"value="Frontpress">
+          <label for="Frontpress">Frontpress</label><br/>
+          <input type="checkbox"value="Bodyweight">
+          <label for="Bodyweight">Bodyweight</label><br/>
+      </div>
+      <div>
+        <p><b>If you have other requests, let us know!</b><p>
+        <textarea>
+          
+        </textarea>
+      </div>
+      <div>
+        <input type="submit" id="submit" value="Submit"></input>
+        
+      </div>
+  </form>
+  <br/>
+  <div>
+</body>  
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
