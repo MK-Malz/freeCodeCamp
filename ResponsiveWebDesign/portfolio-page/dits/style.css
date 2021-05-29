@@ -1,0 +1,58 @@
+#header
+{
+  background-color: black;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+}
+
+.nav-link, #header-img {
+  float: right;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 18px 18px;
+  border-radius: 50%;
+  font-size: 25px;
+  
+}
+#header-img {
+  float: left;
+  height: 75px;
+  width: 100px;
+  border-radius: 50%;
+} 
+#welcome-section
+ {
+   display: block;
+   width: 30%;
+   margin-left: auto;
+   margin-right: auto;  
+   margin-top: 140px;
+   max-height: 100vh;
+}
+#projects
+{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #eeeeee;
+}
+.project-tile
+{
+  height: 190px;
+  width: 200px;
+  border-radius: 3%;
+}
+.project-title, h2, a, p
+{
+  text-align: center;
+}
+
+
+
+@media max-width: 768px {
+font-size: 12px;
+  }
