@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Technical Documentation Page</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+
+
+      <nav id="navbar">
+        <div></div>
+         <ul class="nav-list">
+            <li class="nav-li"><header id="header">Relational Databases</header></li>
+            <li class="nav-li"><a href="#Simple_Query" class="nav-link">Simple Query</a></li>
+            <li class="nav-li"><a href="#Filter_Results" class="nav-link">Filter Results</a></li>
+            <li class="nav-li"><a href="#Order_Results" class="nav-link">Order Results</a></li>
+            <li class="nav-li"><a href="#Aggregate_Functions" class="nav-link">Aggregate Functions</a></li>
+            <li class="nav-li"><a href="#Insert_Values" class="nav-link">Insert Values</a></li>
+         </ul>
+      </nav>
+   
+<main id="main-doc">  
+<section class="main-section" id="Simple_Query">
+  <header><h1>Simple Query</h1></header>
+  <p></p>
+  <code>SELECT * FROM [schema].[table]</code>
+  <p></p>
+  <ul>
+    <li>Basic</li>
+    <li>Stuff</li>
+  </ul>
+</section>
+  
+<hr class="line1">   
+<section class="main-section" id="Filter_Results">
+  <header><h1>Filter Results</h1></header>
+  <p>Filter results using the WHERE clause</p>
+  <code>SELECT * FROM [schema].[table] WHERE column1 = 1</code>
+  <p></p>
+  <ul>
+    <li>Logial operators like AND and OR can be used</li>
+    <li>Using functions in the WHERE clause is allowed</li>
+  </ul>
+</section>
+<hr class="line1"> 
+<section class="main-section" id="Order_Results">
+  <header><h1>Order Results</h1></header>
+    <p>Use the ORDER BY clause to sort you results</p>
+  <code>SELECT * FROM [schema].[table] ORDER BY column1, column2 ASC</code>
+  <p></p>
+  <ul>
+    <li>ASC orders ascending</li>
+    <li>DESC orders descending</li>
+  </ul>
+</section>
+  
+<hr class="line1"> 
+<section class="main-section" id="Aggregate_Functions">
+  <header><h1>Aggregate Functions</h1></header>
+  <p>Calculates the sum of a column</p>
+  <code>SELECT SUM(column1) FROM [schema].[table] GROUP BY column2</code>
+  <p></p>
+  <ul>
+    <li>GROUP by calculates sums for the values of column 2</li>
+  </ul>
+</section>
+<hr class="line1"> 
+<section class="main-section" id="Insert_Values">
+ <header><h1>Insert Values</h1></header>
+  <p>To insert Data into a table use query like this:</p>
+  <code>INSER INTO [schema].[table] VALUES (1,2,'drei')</code>
+  <p></p>
+  <ul>
+    <li>Order of value in parenthesis needs to macth order of columns in table</li>
+    <li>Be careful to use right datatypes</li>
+  </ul>
+</section>
+  
+</main>
+<!-- partial -->
+  
+</body>
+</html>
