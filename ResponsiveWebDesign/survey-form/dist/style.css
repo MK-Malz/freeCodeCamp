@@ -1,0 +1,37 @@
+html
+{
+ background-image: url("https://www.coolibri.de/wp-content/uploads/2020/02/Crossfit-D%C3%BCsseldorf-Reebol-1024x682.jpg");
+ background-color: #cccccc;
+ font-family: Georgia;
+}
+#survey-area
+{
+  width: 50%;
+  background-color: lightgrey;
+  opacity: 0.9;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+}
+#head-div
+{
+  width: 50%;
+  background-color: white;
+  opacity: 0.9;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto; 
+}
+div, #div-like
+{
+  margin-left: 5%;
+  margin-top: 2%;
+}
+.input
+{
+  margin-top: 0%;
+}
+textarea
+{
+  width: 50%;
+}
