@@ -5,7 +5,7 @@ function telephoneCheck(str) {
   {
     return false;
   }
-  var regExSpecC = /[^-^(^)0-9]/ig
+  var regExSpecC = /[^-^(^)0-9\s]/ig
   if(str.match(regExSpecC))
   {
     return false;
