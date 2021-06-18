@@ -6,28 +6,23 @@ function telephoneCheck(str) {
   var regExAlpha = /[a-zA-Z]/ig
   if(str.match(regExAlpha) != null)
   {
-    console.log("no letters");
     return false;
   }
   //no special characters expect -() & space
   var regExSpecC = /[^-^(^)0-9\s]/ig
   if(str.match(regExSpecC)  != null)
   {
-    console.log("no special characters expect -() & space");
     return false;
   }
   //only 10 or 11 numbers (without special characters)
-  //country code needs to be 1
   var regExNumberOfNumbers = /[0-9]/ig
   if(str.match(regExNumberOfNumbers).length < 10 || str.match(regExNumberOfNumbers).length > 11 )
   {
-    console.log("only 10 or 11 numbers (without special characters)")
     return false;
   }
   //country code needs to be 1
   if(str.match(regExNumberOfNumbers).length == 11 && str.match(regExNumberOfNumbers)[0] != 1)
   {
-    console.log("country code needs to be 1")
     return false;
   }
   //opening parentheses needs closing
@@ -35,29 +30,46 @@ function telephoneCheck(str) {
    var regExParenthClosing = /\)/ig
    if(str.match(regExParenthOpening) != null || str.match(regExParenthClosing) != null)
    {
-       if(str.match(regExParenthOpening) == null || str.match(regExParenthClosing) == null)
-       {
-         console.log("opening parentheses needs closing")
-         return false;
-       }
+      if(str.match(regExParenthOpening) == null || str.match(regExParenthClosing) == null)
+      {
+        return false;
+      }
       if(str.match(regExParenthOpening).length != str.match(regExParenthClosing).length)
       {
-        console.log("opening parentheses needs closing")
         return false;
       }
    }
-  //needs to start with letter or opening parentheses
-  var regExParenthStar = /[0-9\(]/;
-  console.log(str.match(regExParenthStar));
-  if(str[0].match(regExParenthStar) == null)
+  //needs to start with number or opening parentheses
+  var regExParenthStart = /[0-9\(]/;
+  if(str[0].match(regExParenthStart) == null)
   {
-    console.log( "needs to start with letter or opening parentheses");
     return false
   }
+  //last char should not be closing oarentheses
+  var regExParenthEnd = /[\)]/;
+  if(str[str.length-1].match(regExParenthEnd) != null)
+  {
+    return false
+  }
+  //group numbers correctly
   
-   
+  if(str.match(regExNumberOfNumbers).length == 10)
+  {
+    var regExGroup1 = /[\(]*[0-9]{3}[\(\)\s-]*[0-9]{3}[\(\)\s-]*[0-9]{4}/;
+    if(str.match(regExGroup1) == null)
+    {
+       return false 
+    }    
+  } else if(str.match(regExNumberOfNumbers).length == 11)
+  {
+    var regExGroup2 = /[0-9][\(\s]*[0-9]{3}[\(\)\s-]*[0-9]{3}[\(\)\s-]*[0-9]{4}/;
+    if(str.match(regExGroup2) == null)
+    {
+       return false 
+    }    
+  }
 
   return true;
 }
 
-console.log(telephoneCheck("-1 (757) 622-7382"));
+
