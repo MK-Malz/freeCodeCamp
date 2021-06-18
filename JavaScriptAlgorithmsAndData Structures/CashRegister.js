@@ -37,8 +37,15 @@ function calculateChange(change, cid)
   }
 
   var formatedChange = [];
-  
-  return returnChange;    
+  for(var j = returnChange.length-1; j >= 0; j--)
+  {
+    if(returnChange[j][1] != 0)
+    {
+        returnChange[j].pop();
+        formatedChange.push(returnChange[j]);
+    }
+  }
+  return formatedChange;    
 }
 
 
@@ -59,5 +66,5 @@ function checkCashRegister(price, cash, cid)
 
 //checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
 
-checkCashRegister(100, 335.35, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 1400]])
+checkCashRegister(100, 335.37, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 1400]])
 
