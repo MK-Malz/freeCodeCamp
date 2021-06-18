@@ -1,18 +1,24 @@
 function telephoneCheck(str) {
-
+  
+  
+  
+  //no letters
   var regExAlpha = /[a-zA-Z]/ig
-  if(str.match(regExAlpha))
+  if(str.match(regExAlpha) != null)
   {
+    console.log(str);
     return false;
   }
+  //no special characters expect -() & space
   var regExSpecC = /[^-^(^)0-9\s]/ig
-  if(str.match(regExSpecC))
+  if(str.match(regExSpecC)  != null)
   {
     return false;
   }
-
+  //10 or 11 numbers (without special characters)
+  
 
   return true;
 }
 
-telephoneCheck("555-555-5555");
+telephoneCheck("55-555-5555");
