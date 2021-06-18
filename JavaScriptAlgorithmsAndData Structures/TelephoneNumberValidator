@@ -1,4 +1,17 @@
 function telephoneCheck(str) {
+
+  var regExAlpha = /[a-zA-Z]/ig
+  if(str.match(regExAlpha))
+  {
+    return false;
+  }
+  var regExSpecC = /[^-^(^)0-9]/ig
+  if(str.match(regExSpecC))
+  {
+    return false;
+  }
+
+
   return true;
 }
 
