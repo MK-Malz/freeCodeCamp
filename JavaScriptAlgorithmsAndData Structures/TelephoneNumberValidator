@@ -6,19 +6,32 @@ function telephoneCheck(str) {
   var regExAlpha = /[a-zA-Z]/ig
   if(str.match(regExAlpha) != null)
   {
-    console.log(str);
+    console.log("no letters");
     return false;
   }
   //no special characters expect -() & space
   var regExSpecC = /[^-^(^)0-9\s]/ig
   if(str.match(regExSpecC)  != null)
   {
+    console.log("no special characters expect -() & space");
     return false;
   }
-  //10 or 11 numbers (without special characters)
-  
+  //only 10 or 11 numbers (without special characters)
+  //country code needs to be 1
+  var regExNumberOfNumbers = /[0-9]/ig
+  console.log(str.match(regExNumberOfNumbers).length)
+  if(str.match(regExNumberOfNumbers).length < 10 || str.match(regExNumberOfNumbers).length > 11 )
+  {
+    console.log("only 10 or 11 numbers (without special characters)")
+    return false;
+  }
+  if(str.match(regExNumberOfNumbers).length == 11 && str.match(regExNumberOfNumbers)[0] != 1)
+  {
+    console.log("country code needs to be 1")
+    return false;
+  }
 
   return true;
 }
 
-telephoneCheck("55-555-5555");
+console.log(telephoneCheck("1 555-555-5555"));
