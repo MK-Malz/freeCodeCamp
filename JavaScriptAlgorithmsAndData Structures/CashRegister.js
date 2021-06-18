@@ -21,15 +21,15 @@ function calculateChange(change, cid)
   ["TWENTY", 0.0, 20.0],
   ["ONE HUNDRED", 0.0, 100.0]
 ];
-
-  var i = returnChange[1].length;
+  
+  var i = returnChange.length-1;
   while(change > 0)
   {
     if(change >= returnChange[i][2] && cid[i][1] != 0)
     {
-      cid[i][1] -=  Math.round(returnChange[i][2] * 100) / 100  ;
-      returnChange[i][1] +=  Math.round(returnChange[i][2] * 100) / 100  ;
-      change -=  Math.round(returnChange[i][2] * 100) / 100  ;
+      cid[i][1] -=  returnChange[i][2]   ;
+      returnChange[i][1] +=  returnChange[i][2]   ;
+      change -=  returnChange[i][2]  ;
     }
     else
       i--
@@ -59,5 +59,5 @@ function checkCashRegister(price, cash, cid)
 
 //checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
 
-checkCashRegister(100, 315.35, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 1400]])
+checkCashRegister(100, 335.35, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 1400]])
 
