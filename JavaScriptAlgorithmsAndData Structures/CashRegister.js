@@ -10,96 +10,54 @@ function fundsSufficient(change, cid)
 
 function calculateChange(change, cid)
 {
-  var returnChange = [];
+  var returnChange = [
+  ["PENNY", 0.0, 0.01],
+  ["NICKEL", 0.0, 0.05],
+  ["DIME", 0.0, 0.1],
+  ["QUARTER", 0.0, 0.25],
+  ["ONE", 0.0, 1.0],
+  ["FIVE", 0.0, 5.0],
+  ["TEN", 0.0, 10.0],
+  ["TWENTY", 0.0, 20.0],
+  ["ONE HUNDRED", 0.0, 100.0]
+];
+
+  var i = returnChange[1].length;
   while(change > 0)
   {
-    if(change >= 100 && cid[8][1] != 0)
+    if(change >= returnChange[i][2] && cid[i][1] != 0)
     {
-      cid[8][1] -= 100;
-      returnChange.push(["ONE HUNDRED", 100]);
-      change -= 100;
+      cid[i][1] -=  Math.round(returnChange[i][2] * 100) / 100  ;
+      returnChange[i][1] +=  Math.round(returnChange[i][2] * 100) / 100  ;
+      change -=  Math.round(returnChange[i][2] * 100) / 100  ;
     }
-    else if(change >= 20 && cid[7][1] != 0)
-    {
-      cid[8][1] -= 20;
-      returnChange.push(["TWENTY", 20]);
-      change -= 20;
-    }
-    else if(change >= 10 && cid[6][1] != 0)
-    {
-      cid[8][1] -= 10;
-      returnChange.push(["TEN", 00]);
-      change -= 10;
-    }
-    else if(change >= 5 && cid[5][1] != 0)
-    {
-      cid[8][1] -= 5;
-      returnChange.push(["FIVE", 5]);
-      change -= 5;
-    }
-    else if(change >= 1 && cid[4][1] != 0)
-    {
-      cid[8][1] -= 1;
-      returnChange.push(["ONE", 1]);
-      change -= 1;
-    }
-    else if(change >= 0.25 && cid[3][1] != 0)
-    {
-      cid[8][1] -= 0.25;
-      returnChange.push(["Quarter", 0.25]);
-      change -= 0.25;
-    }
-    else if(change >= 0.1 && cid[2][1] != 0)
-    {
-      cid[8][1] -= 0.1;
-      returnChange.push(["DIME", 0.1]);
-      change -= 0.1;
-    }
-    else if(change >= 0.05 && cid[1][1] != 0)
-    {
-      cid[8][1] -= 0.05;
-      returnChange.push(["NICKEL", 0.05]);
-      change -= 0.05;
-    }
-    if(change >= 0.05 && cid[1][1] != 0)
-    {
-      cid[8][1] -= 0.01;
-      returnChange.push(["PENNY", 0.01]);
-      change -= 0.01;
-    }
-    return returnChange;
-     
+    else
+      i--
+    change = Math.round(change * 100) / 100    
+  }
+
+  var formatedChange = [];
+  
+  return returnChange;    
 }
-
-
-
-
-
-
-
-
-
 
 
 function checkCashRegister(price, cash, cid) 
 {
   var change = cash-price;
-
-  if(fundsSufficient(change, cid))
+  
+  if(!fundsSufficient(change, cid))
     return {status: "INSUFFICIENT_FUNDS", change: []}
 
   var calculatedChange = calculateChange(change, cid);
-  
+  console.log(calculatedChange);
 
 
-    
-     
-  } 
-
-  return returnChange;
+ 
+  return {status: "INSUFFICIENT_FUNDS", change: []};
 }
 
 //checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
 
-checkCashRegister(100, 500, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 1400]])
+checkCashRegister(100, 315.35, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 1400]])
 
