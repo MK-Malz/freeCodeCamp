@@ -48,7 +48,6 @@ function calculateChange(change, cid)
   return formatedChange;    
 }
 
-
 function checkCashRegister(price, cash, cid) 
 {
   var change = cash-price;
@@ -57,11 +56,8 @@ function checkCashRegister(price, cash, cid)
     return {status: "INSUFFICIENT_FUNDS", change: []}
 
   var calculatedChange = calculateChange(change, cid);
-  console.log(calculatedChange);
 
-
- 
-  return {status: "INSUFFICIENT_FUNDS", change: []};
+  return {status: "OPEN", change: calculatedChange};
 }
 
 //checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
