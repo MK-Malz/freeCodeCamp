@@ -32,18 +32,32 @@ function telephoneCheck(str) {
   }
   //opening parentheses needs closing
    var regExParenthOpening = /\(/ig
-   var regExParenthClosing = /\(/ig
-   if(str.match(regExParenthOpening) != null && str.match(regExParenthClosing) != null)
+   var regExParenthClosing = /\)/ig
+   if(str.match(regExParenthOpening) != null || str.match(regExParenthClosing) != null)
    {
-      if(str.match(regExParenthOpening).length == str.match(regExParenthClosing).length)
+       if(str.match(regExParenthOpening) == null || str.match(regExParenthClosing) == null)
+       {
+         console.log("opening parentheses needs closing")
+         return false;
+       }
+      if(str.match(regExParenthOpening).length != str.match(regExParenthClosing).length)
       {
         console.log("opening parentheses needs closing")
         return false;
       }
    }
+  //needs to start with letter or opening parentheses
+  var regExParenthStar = /[0-9\(]/;
+  console.log(str.match(regExParenthStar));
+  if(str[0].match(regExParenthStar) == null)
+  {
+    console.log( "needs to start with letter or opening parentheses");
+    return false
+  }
+  
    
 
   return true;
 }
 
-console.log(telephoneCheck("1 555-555-5555"));
+console.log(telephoneCheck("-1 (757) 622-7382"));
