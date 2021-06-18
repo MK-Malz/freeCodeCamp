@@ -1,35 +1,33 @@
 function telephoneCheck(str) {
   
-  
-  
-  //no letters
-  var regExAlpha = /[a-zA-Z]/ig
-  if(str.match(regExAlpha) != null)
-  {
-    return false;
-  }
-  //no special characters expect -() & space
-  var regExSpecC = /[^-^(^)0-9\s]/ig
-  if(str.match(regExSpecC)  != null)
-  {
-    return false;
-  }
-  //only 10 or 11 numbers (without special characters)
+
+  //only 10 or 11 numbers (without special characters) in the right format
   var regExNumberOfNumbers = /[0-9]/ig
   if(str.match(regExNumberOfNumbers).length < 10 || str.match(regExNumberOfNumbers).length > 11 )
   {
     return false;
   }
-  //country code needs to be 1
-  if(str.match(regExNumberOfNumbers).length == 11 && str.match(regExNumberOfNumbers)[0] != 1)
+  else if(str.match(regExNumberOfNumbers).length == 10) 
   {
-    return false;
+    var regExGroup1 = /[\(]*[0-9]{3}[\)\s-]*[0-9]{3}[\s-]*[0-9]{4}$/;
+    if(str.match(regExGroup1) == null)
+    {
+       return false 
+    }    
+  } else if(str.match(regExNumberOfNumbers).length == 11)
+  {
+    var regExGroup2 = /^[1][\(\s]*[0-9]{3}[\)\s-]*[0-9]{3}[\s-]*[0-9]{4}$/;
+    if(str.match(regExGroup2) == null)
+    {
+       return false 
+    }    
   }
+  
   //opening parentheses needs closing
-   var regExParenthOpening = /\(/ig
-   var regExParenthClosing = /\)/ig
-   if(str.match(regExParenthOpening) != null || str.match(regExParenthClosing) != null)
-   {
+  var regExParenthOpening = /\(/ig
+  var regExParenthClosing = /\)/ig
+  if(str.match(regExParenthOpening) != null || str.match(regExParenthClosing) != null)
+  {
       if(str.match(regExParenthOpening) == null || str.match(regExParenthClosing) == null)
       {
         return false;
@@ -39,37 +37,11 @@ function telephoneCheck(str) {
         return false;
       }
    }
-  //needs to start with number or opening parentheses
-  var regExParenthStart = /[0-9\(]/;
-  if(str[0].match(regExParenthStart) == null)
-  {
-    return false
-  }
-  //last char should not be closing oarentheses
-  var regExParenthEnd = /[\)]/;
-  if(str[str.length-1].match(regExParenthEnd) != null)
-  {
-    return false
-  }
-  //group numbers correctly
-  
-  if(str.match(regExNumberOfNumbers).length == 10)
-  {
-    var regExGroup1 = /[\(]*[0-9]{3}[\(\)\s-]*[0-9]{3}[\(\)\s-]*[0-9]{4}/;
-    if(str.match(regExGroup1) == null)
-    {
-       return false 
-    }    
-  } else if(str.match(regExNumberOfNumbers).length == 11)
-  {
-    var regExGroup2 = /[0-9][\(\s]*[0-9]{3}[\(\)\s-]*[0-9]{3}[\(\)\s-]*[0-9]{4}/;
-    if(str.match(regExGroup2) == null)
-    {
-       return false 
-    }    
-  }
-
+   
   return true;
 }
+
+console.log(telephoneCheck("-1 (757) 622-7382"))
+
 
 
