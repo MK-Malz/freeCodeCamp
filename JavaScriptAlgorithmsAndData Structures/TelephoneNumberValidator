@@ -19,17 +19,29 @@ function telephoneCheck(str) {
   //only 10 or 11 numbers (without special characters)
   //country code needs to be 1
   var regExNumberOfNumbers = /[0-9]/ig
-  console.log(str.match(regExNumberOfNumbers).length)
   if(str.match(regExNumberOfNumbers).length < 10 || str.match(regExNumberOfNumbers).length > 11 )
   {
     console.log("only 10 or 11 numbers (without special characters)")
     return false;
   }
+  //country code needs to be 1
   if(str.match(regExNumberOfNumbers).length == 11 && str.match(regExNumberOfNumbers)[0] != 1)
   {
     console.log("country code needs to be 1")
     return false;
   }
+  //opening parentheses needs closing
+   var regExParenthOpening = /\(/ig
+   var regExParenthClosing = /\(/ig
+   if(str.match(regExParenthOpening) != null && str.match(regExParenthClosing) != null)
+   {
+      if(str.match(regExParenthOpening).length == str.match(regExParenthClosing).length)
+      {
+        console.log("opening parentheses needs closing")
+        return false;
+      }
+   }
+   
 
   return true;
 }
