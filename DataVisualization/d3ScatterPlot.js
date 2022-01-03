@@ -15,7 +15,7 @@ fetch(
 
     let times = dataset.map(function (item) {
       let parsedTime = item.Time.split(":");
-      return new Date(1970, 0, 1, 0, parsedTime[0], parsedTime[1]);
+      return new Date(Date.UTC(1970, 0, 1, 0, parsedTime[0], parsedTime[1]));
     });
 
     // creata DataViz
@@ -31,7 +31,7 @@ fetch(
 
     const yScale = d3
       .scaleTime()
-      .domain([Math.min(...times), Math.max(...times)])
+      .domain([Math.max(...times), Math.min(...times)])
       .range([h - padding, padding]);
 
     const svg = d3
@@ -54,39 +54,67 @@ fetch(
       })
       .attr("cy", function (d) {
         let parsedTime = d.Time.split(":");
-        return yScale(new Date(1970, 0, 1, 0, parsedTime[0], parsedTime[1]));
+        return yScale(
+          new Date(Date.UTC(1970, 0, 1, 0, parsedTime[0], parsedTime[1]))
+        );
       })
-      .attr("r", 5);
-
-    /*
-    svg
-      .selectAll("rect")
-      .data(dataset)
-      .enter()
-      .append("rect")
-      .attr("x", function (d, i) {
-        return xScale(dates[i]);
+      .attr("r", 5)
+      .attr("class", "dot")
+      .attr("data-xvalue", function (d) {
+        return d.Year;
       })
-      .attr("y", function (d) {
-        return yScale(d[1] - padding);
+      .attr("data-yvalue", function (d) {
+        return d.Time;
       })
-      .attr("width", 1)
-      .attr("height", (d) => (h - padding) - yScale(d[1]))
-      .attr("class", "bar")
-      .attr("data-date", (d) => d[0])
-      .attr("data-gdp", (d) => d[1])
-      .on("mousemove", function(d){
-            console.log(d.path[0]["__data__"][0])
-            tooltip
-              .style("left", d3.pageX - 50 + "px")
-              .style("top", d3.pageY - 70 + "px")
-              .style("display", "flex")
-              .attr("data-date", d.path[0]["__data__"][0])
-              .html(d.path[0]["__data__"][0]);
-        })
-    		.on("mouseout", function(d){ tooltip.style("display", "none");});
-      
-      */
+      .style("fill", function (d) {
+        if (d.Doping !== "") {
+          return "blue";
+        } else {
+          return "orange";
+        }
+      })
+      .on("mouseover", function (d) {
+        tooltip
+          .style("left", d3.pageX - 50 + "px")
+          .style("top", d3.pageY - 70 + "px")
+          .style("display", "flex")
+          .style("border-style", "solid")
+          .style("text-align", "center")
+          .style("align-items", "center")
+          .style("justify-content", "center")
+          .attr("data-year", d.path[0]["__data__"].Year)
+          .html(
+            "<p>" +
+              "<b>Time:</b> " +
+              d.path[0]["__data__"].Time +
+              "<br>" +
+              "<b>Place:</b> " +
+              d.path[0]["__data__"].Place +
+              "<br>" +
+              "<b>Seconds:</b> " +
+              d.path[0]["__data__"].Seconds +
+              "<br>" +
+              "<b>Name:</b> " +
+              d.path[0]["__data__"].Name +
+              "<br>" +
+              "<b>Year:</b> " +
+              d.path[0]["__data__"].Year +
+              "<br>" +
+              "<b>Nationality:</b> " +
+              d.path[0]["__data__"].Nationality +
+              "<br>" +
+              "<b>Doping:</b> " +
+              d.path[0]["__data__"].Doping +
+              "<br>" +
+              "<b>URL:</b> <a href='" +
+              d.path[0]["__data__"].URL +
+              "'>Wiki</a><br>" +
+              "</p>"
+          );
+      })
+      .on("mouseout", function (d) {
+        tooltip.style("display", "none");
+      });
 
     var timeFormat = d3.timeFormat("%M:%S");
 
