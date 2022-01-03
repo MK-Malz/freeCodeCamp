@@ -39,6 +39,7 @@ d3.json(
       .append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(xAxis).tickSize(0))
+      .attr("id", "x-axis");
 
 
     var yAxis = d3.scaleBand().range([height, 0]).domain(months).padding(0.05);
@@ -46,6 +47,7 @@ d3.json(
     svg
       .append("g")
       .call(d3.axisLeft(yAxis).tickSize(0))
+      .attr("id", "y-axis");
     
     let myColor = d3
       .scaleSequential()
@@ -57,7 +59,7 @@ d3.json(
       .select("#my_dataviz")
       .append("div")
       .style("opacity", 0)
-      .attr("class", "tooltip")
+      .attr("id", "tooltip")
       .style("background-color", "white")
       .style("border", "solid")
       .style("border-width", "2px")
@@ -70,9 +72,6 @@ d3.json(
     svg
       .selectAll()
       .data(dataset)
-      /*.data(dataset, function (d) {
-        return d.year + ":" + d.month;
-      })*/
       .enter()
       .append("rect")
       .attr("x", function (d) {
@@ -85,6 +84,16 @@ d3.json(
       .attr("ry", 4)
       .attr("width", xAxis.bandwidth())
       .attr("height", yAxis.bandwidth())
+      .attr("class", "cell")
+      .attr("data-month", function (d) {
+        return d.month-1;
+      })
+      .attr("data-year", function (d) {
+        return d.year;
+      })
+      .attr("data-temp", function (d) {
+        return d.variance;
+      })
       .style("fill", function (d) {
         return myColor(d.variance);
       })
@@ -92,7 +101,7 @@ d3.json(
       .style("stroke", "none")
       .style("opacity", 0.8)
       .on("mouseover", function (d) {
-      tooltip.style("opacity", 1);
+      tooltip.style("opacity", 1).attr("data-year", d.year)
       d3.select(this).style("stroke", "black").style("opacity", 1);
     })
       .on("mousemove", function (d) {
