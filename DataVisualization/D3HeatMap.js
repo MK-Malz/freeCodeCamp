@@ -19,20 +19,28 @@ d3.json(
       
       let dataset = data.monthlyVariance
     
-      let years = d3  //x Axis
+      let years = d3  
       .map(dataset, function (d) {
         return d.year;
       })
       .keys();
     
     
-    let months = d3    //y-Acis
-     .map(dataset, function (d) {
-        return d.month;
+    let months = [ "January", "February", "March", "April", "May", "June", 
+           "July", "August", "September", "October", "November", "December" ];
+    
+    let variances = d3  
+      .map(dataset, function (d) {
+        return d.variance;
       })
-      .keys();
+    .keys();
     
-    
+    let maxVariance = Math.max(...variances)
+    let minVariance = Math.min(...variances)
+    let middleVariance = (maxVariance + minVariance) / 2
+    let upperMiddleVariance = (maxVariance + middleVariance) / 2
+    let lowerMiddleVariance = (middleVariance + minVariance) / 2
+       
     var xAxis = d3.scaleBand().range([0, width]).domain(years).padding(0.05);
     
     svg
@@ -42,18 +50,18 @@ d3.json(
       .attr("id", "x-axis");
 
 
-    var yAxis = d3.scaleBand().range([height, 0]).domain(months).padding(0.05);
-    
+   var yAxis = d3.scaleBand().range([height, 0]).domain(months).padding(0.05);
+      
     svg
       .append("g")
       .call(d3.axisLeft(yAxis).tickSize(0))
       .attr("id", "y-axis");
     
-    let myColor = d3
-      .scaleSequential()
-      .interpolator(d3.interpolateInferno)
-      .domain([1, 100]);
-   
+    let colorRangeValues = d3  
+      .map(dataset, function (d) {
+        return d.variance;
+      })
+      .keys();
     
      var tooltip = d3
       .select("#my_dataviz")
@@ -66,6 +74,36 @@ d3.json(
       .style("border-radius", "5px")
       .style("padding", "5px");
     
+    
+    function getMonat(i) {
+       if(i == 1) {
+            return "January"
+       } else if(i == 2) {
+            return "February"
+       } else if(i == 3) {
+            return "March"
+       } else if(i == 4) {
+            return "April"
+       } else if(i == 5) {
+            return "May"
+       } else if(i == 6) {
+            return "June"
+       } else if(i == 7) {
+            return "July"
+       } else if(i == 8) {
+            return "August"
+       } else if(i == 9) {
+            return "September"
+       } else if(i == 10) {
+            return "October"
+       } else if(i == 11) {
+            return "November"
+       } else if(i == 12) {
+            return "December"
+       } 
+         
+           
+    }
    
    
     // add the squares
@@ -78,7 +116,7 @@ d3.json(
         return xAxis(d.year);
       })
       .attr("y", function (d) {
-        return yAxis(d.month);
+        return yAxis(getMonat(d.month));
       })
       .attr("rx", 4)
       .attr("ry", 4)
@@ -95,7 +133,17 @@ d3.json(
         return d.variance;
       })
       .style("fill", function (d) {
-        return myColor(d.variance);
+
+        if(d.variance > minVariance && d.variance < lowerMiddleVariance ){
+           return "blue"
+         } else if(d.variance > lowerMiddleVariance && d.variance < middleVariance){
+           return "yellow"
+        } else if(d.variance > middleVariance && d.variance < upperMiddleVariance){
+           return "orange"
+        } else if(d.variance > upperMiddleVariance && d.variance < maxVariance){
+           return "red"
+        }
+     
       })
       .style("stroke-width", 4)
       .style("stroke", "none")
@@ -106,7 +154,7 @@ d3.json(
     })
       .on("mousemove", function (d) {
       tooltip
-        .html("The exact value of<br>this cell is: " + d.variance)
+        .html("Variance in this cell is " + d.variance)
         .style("left", d3.mouse(this)[0] + 70 + "px")
         .style("top", d3.mouse(this)[1] + "px");
     })
