@@ -8,6 +8,16 @@ fetch(
       return item.Year;
     });
 
+    /*
+    var parsedTime = d.Time.split(':');
+      d.Time = new Date(1970, 0, 1, 0, parsedTime[0], parsedTime[1]);
+    */
+
+    let times = dataset.map(function (item) {
+      let parsedTime = item.Time.split(":");
+      return new Date(1970, 0, 1, 0, parsedTime[0], parsedTime[1]);
+    });
+
     // creata DataViz
     const w = 1000;
     const h = 500;
@@ -21,7 +31,7 @@ fetch(
 
     const yScale = d3
       .scaleTime()
-      //.domain([0, d3.max(dataset, (d) => d[1])])
+      .domain([Math.min(...times), Math.max(...times)])
       .range([h - padding, padding]);
 
     const svg = d3
@@ -39,13 +49,12 @@ fetch(
       .data(dataset)
       .enter()
       .append("circle")
-      //.attr("cx", (d) => d.Year)
-      //.attr("cy", (d) => d.Time)
       .attr("cx", function (d) {
         return xScale(d.Year);
       })
       .attr("cy", function (d) {
-        return yScale(d.Time);
+        let parsedTime = d.Time.split(":");
+        return yScale(new Date(1970, 0, 1, 0, parsedTime[0], parsedTime[1]));
       })
       .attr("r", 5);
 
@@ -82,11 +91,7 @@ fetch(
     var timeFormat = d3.timeFormat("%M:%S");
 
     const xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.format("d"));
-
-    const yAxis = d3.axisLeft(yScale);
-
-    //const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
-    //const yAxis = d3.axisLeft(yScale).tickFormat(timeFormat);
+    const yAxis = d3.axisLeft(yScale).tickFormat(timeFormat);
 
     svg
       .append("g")
